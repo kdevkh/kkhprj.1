@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Banner */
+.banner {
+    height: 300px;
+    display: flex;
+    /* Enables flexbox layout for the images */
+}
+
+.banner img {
+    height: 100%;
+    /* Ensures each image takes the full height of the banner */
+    width: auto;
+    /* Allows images to maintain their aspect ratio */
+}
+
+/* Search */
+.search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+
+}
+
+.search label {
+    font-size: 25px;
+}
+
+.search input {
+    margin: 35px 0px 35px 20px;
+    min-width: 550px;
+    padding: 5px 10px;
+    border-color: black;
+}
+
+.search button {
+    margin: 35px 0px 35px 0px;
+    padding: 5px;
+    width: 150px;
+    background-color: black;
+    color: white;
+}
+
+/* Card */
+
+.container {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 0px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+}
+
+
+.card {
+    width: 100%;
+    margin: 20px;
+}
