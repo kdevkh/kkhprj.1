@@ -56,7 +56,7 @@ body {
     grid-auto-rows: minmax(50px, auto);
 }
 
-/* 지피티 제안 */
+/* 기존 지피티 제안 */
 .card {
     width: 100%;
     margin: 20px;
@@ -93,24 +93,3 @@ body {
 .card-overview {
     margin: 5px 0;
 }
-
-
-
-
-/* .card {
-    width: 100%;
-    margin: 20px;
-    padding: 10px;
-    border-color: black;
-    display: flex;
-}
-
-.card-title {
-    margin: 5px 0 5px 0;
-    height: 80px;
-}
-
-.card-title-text {
-    display: table-cell;
-    vertical-align: middle;
-} */

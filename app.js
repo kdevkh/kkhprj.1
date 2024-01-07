@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // 여기에 기존의 전역 코드를 넣으세요.
 
-// ------------- Card Making -------------
+    // ------------- Card Making -------------
     // const defined
     const movieContainer = document.getElementById('Cards');
     const searchInput = document.getElementById('search-input');
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Call the combined function
     combineDataAndCreateUrls();
 
-// ------------- Search Function -------------
+    // ------------- Search Function -------------
     // 추가된 검색 함수
     function searchMovies() {
         // 사용자가 입력한 검색어 가져오기
@@ -137,4 +137,83 @@ document.addEventListener("DOMContentLoaded", function () {
     if (searchButton) {
         searchButton.addEventListener('click', searchMovies);
     }
+
+    // 검색 버튼 및 엔터 키 이벤트 리스너 추가
+    if (searchButton) {
+        searchButton.addEventListener('click', searchMovies);
+    }
+
+    if (searchInput) {
+        // 검색 입력란에 포커스 설정하여 커서 위치시키기
+        searchInput.focus();
+
+        // 엔터 키 이벤트 감지
+        searchInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                // 엔터 키를 누르면 검색 함수 호출
+                searchMovies();
+            }
+        });
+    }
+
+
+// ------------- Sort Function -------------
+    // 정렬 기준 선택 드롭다운 메뉴 추가
+    const sortDropdown = document.createElement('div');
+    sortDropdown.innerHTML = `
+        <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                정렬 기준
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                <li><a class="dropdown-item" href="#" id="sortByRating">높은 Rating 순서</a></li>
+                <li><a class="dropdown-item" href="#" id="sortByReleaseDate">최근 Release Date 순서</a></li>
+                <li><a class="dropdown-item" href="#" id="sortByPopularity">높은 Popularity 순서</a></li>
+            </ul>
+        </div>
+    `;
+    document.body.insertBefore(sortDropdown, movieContainer);
+
+    // 정렬 이벤트 리스너 추가
+    const sortByRatingButton = document.getElementById('sortByRating');
+    const sortByReleaseDateButton = document.getElementById('sortByReleaseDate');
+    const sortByPopularityButton = document.getElementById('sortByPopularity');
+
+    if (sortByRatingButton && sortByReleaseDateButton && sortByPopularityButton) {
+        sortByRatingButton.addEventListener('click', () => {
+            sortCardsBy('vote_average');
+        });
+
+        sortByReleaseDateButton.addEventListener('click', () => {
+            sortCardsBy('release_date');
+        });
+
+        sortByPopularityButton.addEventListener('click', () => {
+            sortCardsBy('popularity');
+        });
+    }
+
+    // 기본적으로는 Rating 순으로 정렬
+    sortCardsBy('vote_average');
+
+    // 정렬 기능 함수
+    function sortCardsBy(sortKey) {
+        const allCards = document.querySelectorAll('.card');
+        const sortedCards = Array.from(allCards).sort((a, b) => {
+            const aValue = a.getAttribute(`data-${sortKey}`);
+            const bValue = b.getAttribute(`data-${sortKey}`);
+
+            if (sortKey === 'release_date') {
+                return new Date(bValue) - new Date(aValue);
+            } else {
+                return bValue - aValue;
+            }
+        });
+
+        movieContainer.innerHTML = '';
+        sortedCards.forEach(card => {
+            movieContainer.appendChild(card);
+        });
+    }
 });
+
