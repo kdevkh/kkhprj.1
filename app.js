@@ -1,3 +1,4 @@
+require('dotenv').config();
 document.addEventListener("DOMContentLoaded", () => {
     // searchInput이 HTML에서 정의되지 않아 이에 따른 js 실행에 에러가 있었음
     // 비동기적인 js 로딩이 문제(Race condition)였던 것으로 파악 >> HTML 파싱 후 js 실행 및 적용
@@ -7,13 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const movieContainer = document.getElementById('Cards');
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-btn');
+    const apiKey = process.env.API_KEY;
 
     // API 호출 방식(GET) 및 Authorization Key 발급 내역
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MmFjMDczZmM2NGZhZGE5YTMxNTU1MzlkNWYzMGViZCIsInN1YiI6IjY1OTc3Yzc4NTkwN2RlNTQ2ZTYzYzA3ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UicVG0R1cpvWhApW9lCa5MASIhIm99FNmHtVGJ6mIjU'
+            Authorization: apiKey
         }
     };
 
